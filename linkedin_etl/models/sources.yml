@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: dbt_bronze
+    database: linkedin123456
+    schema: dbt_bronze
+    tables:
+      - name: skills_raw
+        columns:
+          - name: job_skills
+            tests:
+              - not_null
+      - name: job_posting_raw
+        columns:
+          - name: last_processed_time
+            tests:
+              - not_null
+
+  - name: dbt_silver
+    database: linkedin123456
+    schema: dbt_silver
+    tables:
+      - name: cleaned_job_postings
+      - name: cleaned_skills
+      - name: cleaned_skills_first_skill  # Ajout de la nouvelle source
+      - name: cleaned_skills_most_common
